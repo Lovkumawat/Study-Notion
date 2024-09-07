@@ -58,7 +58,7 @@ exports.sendOTP=async(req,res)=>{
     // return response successfully
     res.status(200).json({
         success:true,
-        message:'OTP Send Successfully'
+        message:'OTP Sent Successfully'
     })
 
     }catch(error){
@@ -124,7 +124,7 @@ exports.signUp=async(req,res)=>{
         //OTP not found
         return res.status(400).json({
             success:false,
-            message:"OTP Found",
+            message:"OTP Not Found",
         });
     }else if(otp!==recentOtp.otp){
         // Invalid OTP
@@ -154,7 +154,7 @@ exports.signUp=async(req,res)=>{
         password:hashedPassword,
         accountType,
         additionaldetails:profiledetails._id,
-        image:`http://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`
+        image:`https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`
     });
     // return response
     return res.status(200).json({
@@ -203,13 +203,12 @@ exports.login=async(req,res)=>{
         }
         //generate JWT,after password matchinf
       
-
         if(await bcrypt.compare(password,user.password)){
             // password match
             const payload={
                 email:user.email,
                 id:user._id,
-                role:user.role
+                accountType:user.accountType,
             }
 
             let token=jwt.sign(payload,
@@ -276,7 +275,7 @@ exports.login=async(req,res)=>{
 // exports.changePassword=async(req,res)=>{
 
 //     try{
-//             // get data from req body
+//           // get data from req body
 //     const userDetails= await User.findById(req.user.id)
 //     // get olsPassword,newPassword,confirmPassword
 //     const {oldPassword,newPassword}=req.body
