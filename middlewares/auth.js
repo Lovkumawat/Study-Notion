@@ -60,7 +60,7 @@ exports.isStudent=async(req,res,next)=>{
     }
     }
 // isInstructor
-    exports.isInsructor=async(req,res,next){
+    exports.isInsructor=async(req,res,next)=>{
         try{
             if(req.user.accountType!=="Instructor"){
                 return res.status(401).json({
@@ -100,6 +100,6 @@ exports.isAdmin=async(req,res,next)=>{
     }
 
     }
-    
+
 
 
