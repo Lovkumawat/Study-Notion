@@ -1,4 +1,5 @@
 const mongoose=require("mongoose");
+const { resetPasswordToken } = require("../middlewares/ResetPassword");
 
 const userSchema=new mongoose.Schema({
     firstName:{
@@ -39,6 +40,12 @@ const userSchema=new mongoose.Schema({
     image:{
         type:String,
         required:true,
+    },
+    token:{
+        type:String,
+    },
+    resetPasswordExpires:{
+        type:Date,
     },
     CourseProgress:[
         {
